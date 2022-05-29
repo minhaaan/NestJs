@@ -39,8 +39,16 @@ class ViewController: UIViewController {
     }
     
     @objc private func buttonTapped() {
-        print("DEBUG: dlwlrma")
-        textView.text += "dlwlrma"
+        guard let url = URL(string: "http://localhost:3000/") else { return }
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+                guard let stringData = String(data: data, encoding: .utf8) else { return }
+                textView.text = stringData
+            } catch {
+                textView.text = error.localizedDescription
+            }
+        }
     }
 
 }
