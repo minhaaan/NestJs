@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.cornerRadius = 8
         textView.isUserInteractionEnabled = false
+        textView.font = .systemFont(ofSize: 20)
         return textView
     }()
     
@@ -38,7 +39,8 @@ class ViewController: UIViewController {
     }
     
     @objc private func buttonTapped() {
-        print("DEBUG: button did tapped..")
+        print("DEBUG: dlwlrma")
+        textView.text += "dlwlrma"
     }
 
 }
