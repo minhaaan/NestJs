@@ -8,12 +8,65 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private let textView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .white
+        textView.textColor = .black
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.cornerRadius = 8
+        textView.isUserInteractionEnabled = false
+        return textView
+    }()
+    
+    private let button: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("action", for: .normal)
+        button.backgroundColor = .black
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        button.addTarget(nil, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        setupLayout()
+    }
+    
+    @objc private func buttonTapped() {
+        print("DEBUG: button did tapped..")
     }
 
+}
 
+// MARK: Layout
+
+extension ViewController {
+    private func setupLayout() {
+        view.backgroundColor = .white
+        
+        view.addSubview(button)
+        view.addSubview(textView)
+        
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            button.widthAnchor.constraint(equalToConstant: 100),
+            button.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 }
 
